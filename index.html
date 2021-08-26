@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,18 +8,72 @@
     <link rel="stylesheet" href="./styles.css">
     <title>No Soy Muy Creativo | Acamica</title>
 </head>
+
 <body>
     <div class="container">
         <div class="img">
 
-            <img src="./img/sander-crombach-IcRYaSigedM-unsplash.jpeg" alt="El Chalten me encanta" >
+            <img src="./img/sander-crombach-IcRYaSigedM-unsplash.jpeg" alt="El Chalten me encanta">
         </div>
         <div class="cta">
             <h1>Hola vamonos para el Chalten</h1>
             <p>No te pierdas de esta maravillosa oportunidad XYZ</p>
-            <input type="email" name="" id="cta-input">
-            <button id="btn">Descubre el Chalten</button>
+            <div class="enviar" id="enviar">
+                <input type="email" name="" id="cta-input">
+                <button id="btn">Descubre el Chalten</button>
+
+            </div>
         </div>
     </div>
+
+
+
+
+    <script>
+        let ctaInput = document.getElementById("cta-input")
+        let btn = document.getElementById("btn")
+        let endpointURL = "https://us-central1-nosoymuycreativo-xyz.cloudfunctions.net/enviarEmail"
+        let enviar = document.getElementById("enviar")
+        btn.addEventListener("click", async () => {
+            let email = ctaInput.value
+            console.log(email)
+            await fetch(endpointURL, {
+                method: 'POST',
+                headers: {
+      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    }, // *GET, POST, PUT, DELETE, etc.
+                referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+                body: {email} // body data type must match "Content-Type" header
+            })
+            
+            enviar.innerHTML = "<p>Gracias por querer acompañarme</p>"
+        })
+
+    </script>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyCvwlAnlKZLZ8p8eDOYfw0ctc-86_Qnl-I",
+            authDomain: "nosoymuycreativo-xyz.firebaseapp.com",
+            projectId: "nosoymuycreativo-xyz",
+            storageBucket: "nosoymuycreativo-xyz.appspot.com",
+            messagingSenderId: "109247852465",
+            appId: "1:109247852465:web:357317d207e106dd741790",
+            measurementId: "G-JD0G71VY0K"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+    </script>
 </body>
+
 </html>
