@@ -32,7 +32,7 @@
     <script>
         let ctaInput = document.getElementById("cta-input")
         let btn = document.getElementById("btn")
-        let endpointURL = "https://us-central1-nosoymuycreativo-xyz.cloudfunctions.net/enviarEmail"
+        let endpointURL = "http://localhost:5001/nosoymuycreativo-xyz/us-central1/enviarEmail"
         let enviar = document.getElementById("enviar")
         btn.addEventListener("click", async () => {
             let email = ctaInput.value
@@ -40,14 +40,13 @@
             await fetch(endpointURL, {
                 method: 'POST',
                 headers: {
-      'Content-Type': 'application/json'
-      // 'Content-Type': 'application/x-www-form-urlencoded',
-    }, // *GET, POST, PUT, DELETE, etc.
-    mode: 'no-cors', // no-cors, *cors, same-origin
-                referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-                body: JSON.stringify({email}) // body data type must match "Content-Type" header
+                    'Content-Type': 'application/json'
+
+                },
+                mode: 'no-cors',
+                body: JSON.stringify({ email })
             })
-            
+
             enviar.innerHTML = "<p>Gracias por querer acompañarme</p>"
         })
 

@@ -16,7 +16,7 @@ let transporter = nodemailer.createTransport({
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 //
 exports.enviarEmail = functions.https.onRequest(async (request, response) => {
-    let email =request.body.email
+    let email = JSON.parse(request.body).email
     functions.logger.info(email, {structuredData: true});
 
     await main(email)
